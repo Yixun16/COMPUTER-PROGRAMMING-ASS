@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 using namespace std;
 
 //constant size array and congestion limit
@@ -24,22 +25,76 @@ int main()
 	//declaration
 	Traffic roadA[SIZE];
 	Traffic roadB[SIZE];
+	string fileName = "Traffic_Data.txt";
+		
+	//Comfirmation of creating file
+	ofstream outFile;
+	outFile.open(fileName,ios::out);
+	
+	if (!outFile)
+	{
+		cout << "Unable to open file. " << endl;
+		exit(1);
+	}
+	
 
-		//Input ROAD A
-		cout << "====== ROAD A ======" << endl;
+	//Insert data Road A and Road B into text file
+	cout << "===== ENTER TRAFFIC DATA =====" << endl;
+	cout << "The data will be save into " << fileName << endl << endl << endl;
+
+
+	//Data Road A
+	cout << "===== ROAD A =====" << endl;
 		for (int i = 0; i < SIZE; i++)
 		{
-			cout << " The vehicle count at period " << i + 1 << " is : ";
-			cin >> roadA[i].vehiclesCounts;
+			int tempDataMemory = 0;
+			cout << "The vehicle count at period " << i + 1 << " is : ";
+			cin >> tempDataMemory;
+			outFile << tempDataMemory << endl;
 		}
 
-		//Input ROAD B
-		cout << endl << "====== ROAD B ======" << endl;
+
+	//Data Road B
+	cout << endl << endl << "===== ROAD B =====" << endl;
 		for (int i = 0; i < SIZE; i++)
 		{
-			cout << " The vehicle count at period " << i + 1 << " is : ";
-			cin >> roadB[i].vehiclesCounts;
+			int tempDataMemory = 0;
+			cout << "The vehicle count at period " << i + 1 << " is : ";
+			cin >> tempDataMemory;
+			outFile << tempDataMemory << endl;
 		}
+		
+	outFile.close();
+	cout << endl << "All data is been saved into " << fileName << endl;
+
+
+	//Take data from file to array
+	ifstream inFile;
+	inFile.open(fileName, ios::in);
+
+
+	//Comfirmation of reading file
+	if (!inFile)
+	{
+		cout << "Unable to read file. " << endl;
+		exit(1);
+	}
+
+
+	//Data A to array roadA
+	for (int i = 0; i < SIZE; i++)
+	{
+		inFile >> roadA[i].vehiclesCounts;
+	}
+
+
+	//Data B to array roadB
+	for (int i = 0; i < SIZE; i++)
+	{
+		inFile >> roadB[i].vehiclesCounts;
+	}
+	inFile.close();
+
 
 	//Process of ROAD A
 	int totalRoadA = 0;
@@ -59,6 +114,7 @@ int main()
 	aveRoadB = averageVehicles(roadB);
 	peakRoadB = peakTrafficPeriod(roadB);
 
+
 	//Output report Road A
 	cout << endl << endl << endl << "===== ROAD A REPORT =====" << endl;
 	cout << "Total Vehicles : " << totalRoadA << endl;
@@ -69,8 +125,9 @@ int main()
 	cout << endl << "Traffic Congenstion Period : " << endl; 
 	congestionPeriod(roadA);
 
+
 	//Output report Road B
-	cout << endl << "===== ROAD B REPORT =====" << endl;
+	cout << endl << endl << "===== ROAD B REPORT =====" << endl;
 	cout << "Total Vehicles : " << totalRoadB << endl;
 	cout << "Average Vehicles : " << fixed << setprecision(2) << aveRoadB << endl;
 	cout << "Peak Traffic Period : " << peakRoadB << endl;
@@ -79,23 +136,24 @@ int main()
 	cout << endl << "Traffic Congenstion Period : " << endl;
 	congestionPeriod(roadB);
 
+
 	//Comparision of Road A and Road 
 	cout << endl << endl << "===== COMPARISION TRAFFIC FLOW BOTH ROAD =====" << endl;
 	if (totalRoadA > totalRoadB)
 	{
-		cout << "Road A having heavily traffic flow than road B " << endl;
+		cout << "Road A having heavily traffic flow than road B " << endl << endl;
 	}
 	else if (totalRoadA < totalRoadB)
 	{
-		cout << "Road B having heavily traffic flow than road A " << endl;
+		cout << "Road B having heavily traffic flow than road A " << endl << endl;
 	}
 	else 
 	{
-		cout << "Both road having same traffic flow " << endl;
+		cout << "Both road having same traffic flow " << endl << endl;
 	}
-
 	return 0;
 }
+
 
 
 // Function classify traffic flow
@@ -147,7 +205,7 @@ int peakTrafficPeriod(Traffic road[])
 		if (road[i].vehiclesCounts > road[peak].vehiclesCounts)
 			peak = i;
 	}
-	return peak;
+	return peak + 1;
 }
 
 // Function congestion
