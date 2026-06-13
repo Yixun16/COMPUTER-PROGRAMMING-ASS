@@ -72,7 +72,6 @@ int main()
 	ifstream inFile;
 	inFile.open(fileName, ios::in);
 
-
 	//Comfirmation of reading file
 	if (!inFile)
 	{
@@ -80,13 +79,11 @@ int main()
 		exit(1);
 	}
 
-
 	//Data A to array roadA
 	for (int i = 0; i < SIZE; i++)
 	{
 		inFile >> roadA[i].vehiclesCounts;
 	}
-
 
 	//Data B to array roadB
 	for (int i = 0; i < SIZE; i++)
