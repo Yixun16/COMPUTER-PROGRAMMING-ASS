@@ -118,7 +118,7 @@ int main()
 	cout << "Peak Traffic Period : " << peakRoadA << endl;
 	cout << endl << "Traffic Classification : " << endl;
 	classifyTrafficFlow(roadA); //calling out data from the function
-	cout << endl << "Traffic Congenstion Period : " << endl; 
+	cout << endl << "Traffic Congestion Period : " << endl; 
 	congestionPeriod(roadA); //calling out data from the function
 
 
@@ -129,12 +129,12 @@ int main()
 	cout << "Peak Traffic Period : " << peakRoadB << endl;
 	cout << endl << "Traffic Classification : " << endl;
 	classifyTrafficFlow(roadB) ; //calling out data from the function
-	cout << endl << "Traffic Congenstion Period : " << endl;
+	cout << endl << "Traffic Congestion Period : " << endl;
 	congestionPeriod(roadB); //calling out data from the function
 
 
-	//Comparision of Road A and Road 
-	cout << endl << endl << "===== COMPARISION TRAFFIC FLOW BOTH ROAD =====" << endl;
+	//Comparison of Road A and Road 
+	cout << endl << endl << "===== COMPARISON TRAFFIC FLOW BOTH ROAD =====" << endl;
 	if (totalRoadA > totalRoadB) //using else if to compare both road
 	{
 		cout << "Road A having heavily traffic flow than road B " << endl << endl;
